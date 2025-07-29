@@ -2,12 +2,12 @@ package TestRunner;
 
 import org.junit.runner.RunWith;
 
-import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="E:\\CucumberFromScratch\\Features\\Login.feature",
+@CucumberOptions(features="src/test/resources/Features/Login.feature",
                  glue={"StepDefinition"},
                  dryRun=false, 
                  monochrome = true, 

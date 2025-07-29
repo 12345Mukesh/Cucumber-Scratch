@@ -7,101 +7,90 @@
 	<version>5.0.0</version>
 
 	<properties>
-		<jre.level>1.8</jre.level>
-		<jdk.level>1.8</jdk.level>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<java.version>22</java.version>
+		<maven.compiler.release>22</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<lombok.version>1.18.30</lombok.version>
+		<selenium.version>4.10.0</selenium.version>
 	</properties>
-
 
 	<build>
 		<plugins>
-			<!-- Compiler plug-in -->
+			<!-- Maven Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.11.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
+					<release>${maven.compiler.release}</release>
+					<compilerArgs>
+						<arg>--enable-preview</arg>
+						<arg>-Xlint:all</arg>
+						<arg>--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+						<arg>--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
-			<!-- Below plug-in is used to execute tests -->
+
+			<!-- Surefire Plugin for TestNG with Preview Features -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
-				<!--                <configuration>-->
-				<!--                    <suiteXmlFiles>-->
-				<!--                        &lt;!&ndash; TestNG suite XML files &ndash;&gt;-->
-				<!--                        <suiteXmlFile>Customer.xml</suiteXmlFile>-->
-				<!--                    </suiteXmlFiles>-->
-				<!--                </configuration>-->
+				<version>3.1.2</version>
+				<configuration>
+					<argLine>--enable-preview</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- Selenium -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.141.59</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<!-- WebDriver Manager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>5.3.3</version>
+			<version>5.6.3</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<!-- Apache POI -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>5.0.0</version>
+			<version>5.2.4</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>5.0.0</version>
+			<version>5.2.4</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<!-- TestNG -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.4.0</version>
+			<version>7.8.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-		<dependency>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.8.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-		<dependency>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-surefire-plugin</artifactId>
-			<version>3.0.0-M5</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<!-- Extent Reports -->
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
-			<version>5.0.8</version>
+			<version>5.1.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
@@ -132,50 +121,30 @@
 			<version>7.8.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.cobertura/cobertura -->
-		<dependency>
-			<groupId>net.sourceforge.cobertura</groupId>
-			<artifactId>cobertura</artifactId>
-			<version>2.1.1</version>
-			<scope>test</scope>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-jvm-deps -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-jvm-deps</artifactId>
-			<version>1.0.6</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+		<!-- Cucumber Reporting -->
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
-			<version>5.7.3</version>
+			<version>5.7.6</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
+		<!-- Hamcrest -->
 		<dependency>
 			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
+			<artifactId>hamcrest</artifactId>
 			<version>2.2</version>
 		</dependency>
 
+		<!-- Logging -->
 		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-gherkin</artifactId>
-			<version>6.7.0</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.20.0</version>
 		</dependency>
-		<!--        &lt;!&ndash; Thanks for using https://jar-download.com &ndash;&gt;-->
-		<!--    -->
-
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.20.0</version>
 		</dependency>
 
 		<dependency>
@@ -185,26 +154,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.2</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun</groupId>
-			<artifactId>tools</artifactId>
-			<version>1.7</version>
-			<scope>system</scope>
-			<systemPath>C:\Program Files\Java\jdk-11.0.16\lib\tools.jar</systemPath>
-
-		</dependency>
-
 	</dependencies>
-
-
 </project>
